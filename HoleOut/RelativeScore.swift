@@ -8,11 +8,34 @@
 import SwiftUI
 
 struct RelativeScore: View {
+    private let par: Int
+    private let score: Int
+    
+    init(par: Int, score: Int) {
+        self.par = par
+        self.score = score
+    }
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        let relative = score - par
+        
+        switch relative {
+        case 0:
+            Text("E")
+                .foregroundStyle(.blue)
+        case let score where score > 0:
+            Text("+\(relative)")
+                .foregroundStyle(.orange)
+        case let score:
+            Text("\(relative)")
+                .foregroundStyle(.green)
+            
+        }
     }
 }
 
 #Preview {
-    RelativeScore()
+    RelativeScore(par: 3, score: 2)
+    RelativeScore(par: 5, score: 5)
+    RelativeScore(par: 5, score: 7)
 }
