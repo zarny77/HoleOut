@@ -8,11 +8,21 @@
 import SwiftUI
 
 struct StatItem: View {
+    
+    let label: String
+    let value: Int
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        HStack {
+            Text(label)
+                .foregroundStyle(.secondary)
+            Text(String(value))
+                .fontWeight(.bold)
+        }
+        .font(.subheadline)
     }
 }
 
 #Preview {
-    StatItem()
+    StatItem(label: "Average", value: 92)
 }
