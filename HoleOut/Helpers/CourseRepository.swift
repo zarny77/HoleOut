@@ -13,6 +13,14 @@ class CourseRepository {
     
     private init() {}
     
+    func getCourse(byId id: UUID) -> Course? {
+        return courses.first { $0.id == id }
+    }
+    
+    func getAllCourses() -> [Course] {
+        return courses
+    }
+    
     let courses: [Course] = [
         .stBoniface,
         .southside,
