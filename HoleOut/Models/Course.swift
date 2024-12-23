@@ -1,5 +1,5 @@
 //
-//  CourseModel.swift
+//  Course.swift
 //  HoleOut
 //
 //  Created by Dylan Zarn on 2024-12-20.
