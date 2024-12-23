@@ -6,8 +6,9 @@
 //
 
 import Foundation
+import SwiftData
 
-
+@Model
 final class Hole {
     
     var id: Int
