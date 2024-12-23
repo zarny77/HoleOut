@@ -22,21 +22,48 @@ struct HoleScoringCard: View {
                 holeDetails
                 Spacer()
                 buttonStack
+                scoreIndicator
             }
             
         }
         .padding(.horizontal)
     }
     
+    // MARK: - Components
+    
     private var holeDetails: some View {
-        VStack {
-            Text(String(hole.id))
-                .font(.largeTitle)
-                .fontWeight(.black)
+        HStack{
+        VStack(alignment: .leading) {
+                Text(String(hole.id))
+                    .font(.system(size: 50))
+                    .fontWeight(.black)
+                    .padding(.vertical, -5)
             YardageMarkers(b: hole.blues, w: hole.whites, r: hole.reds)
+            }
+            Spacer()
+            Image(systemName: hole.holeType.rawValue)
+                .font(.largeTitle)
+            Spacer()
         }
     }
     
+    private var scoreIndicator: some View {
+        VStack (alignment: .trailing, spacing: -20){
+            
+            HStack {
+
+                VStack(alignment: .trailing) {
+                    RelativeScore(par: hole.par, score: 5)
+                        .font(.title)
+                }
+            }
+            Text(String(hole.par))
+                .font(.system(size: 100, weight: .black))
+        }
+        .padding(.horizontal)
+    }
+    
+    // MARK: Buttons
     private var buttonStack: some View {
         VStack {
             Spacer()
@@ -69,5 +96,10 @@ struct HoleScoringCard: View {
 }
 
 #Preview {
-        HoleScoringCard(hole: MockData.previewCourse.holes[0] )
+    ScrollView {
+        ForEach(MockData.previewCourse.holes) { hole in
+            HoleScoringCard(hole: hole)
+        }
+    }
+        
 }
