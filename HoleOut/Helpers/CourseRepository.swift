@@ -21,7 +21,7 @@ class CourseRepository {
         return courses
     }
     
-    let courses: [Course] = [
+    private let courses: [Course] = [
         .stBoniface,
         .southside,
         .maplewood
