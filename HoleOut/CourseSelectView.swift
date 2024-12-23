@@ -17,7 +17,7 @@ struct CourseSelectView: View {
         if searchText.isEmpty {
             return CourseRepository.shared.getAllCourses()
         }
-        return CourseRepository.shared.courses.filter { course in
+        return CourseRepository.shared.getAllCourses().filter { course in
             course.name.localizedCaseInsensitiveContains(searchText) ||
             course.address.localizedCaseInsensitiveContains(searchText)
         }
