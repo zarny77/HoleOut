@@ -47,10 +47,6 @@ final class Round {
             .reduce(0,+)
     }
     
-    var scoreRelativeToPar: Int {
-        totalScore - parForPlayedHoles
-    }
-    
     var frontNine: Int {
         zip(scores.prefix(9), playedHoles.prefix(9))
             .filter { _, played in played }
@@ -73,10 +69,19 @@ final class Round {
         holesPlayed > 0 && !isComplete
     }
     
-    var roundDuration: TimeInterval? {
-        guard let start = startTime else { return nil }
-        let end = endTime ?? Date()
-        return end.timeIntervalSince(start)
+    private var duration: TimeInterval? {
+        startTime.map { (endTime ?? Date()).timeIntervalSince($0) }
+    }
+    
+    var roundDuration: String? {
+        duration.map { duration in
+            let hours = Int(duration) / 3600
+            let minutes = Int(duration) / 60 % 60
+            return hours > 0 ? "\(hours)h \(minutes)m" : "\(minutes)m"}
+    }
+    
+    var dateString: String {
+        date.formatted(date: .abbreviated, time: .omitted)
     }
     
 }
