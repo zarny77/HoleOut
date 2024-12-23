@@ -10,38 +10,73 @@ import SwiftUI
 struct YardageView: View {
     
     // store yardages and pin colour
-    let yds: Int
-    let pin: Color
+    let blues: Int
+    let whites: Int
+    let reds: Int
     
     // add them in an init
-    init(_ yds: Int, _ pin: Color) {
-        self.yds = yds
-        self.pin = pin
+    init(b blues: Int, w whites: Int, r reds: Int) {
+        self.blues = blues
+        self.whites = whites
+        self.reds = reds
     }
     
     var body: some View {
     
         // build circle marker with input colour and yardage
-        HStack(spacing: 6) {
-            
-            Circle()
-                .fill(pin)
-                .frame(width: 10, height: 10)
-            
-            Text(String(yds))
-                .font(.footnote)
-                .foregroundStyle(.primary)
+        
+        VStack {
+            blueMarker
+            whiteMarker
+            redMarker
         }
         .frame(width: 50)
         
+    }
+    
+    private var blueMarker: some View {
+        HStack(spacing: 6) {
+            
+            Circle()
+                .fill(.blue)
+                .frame(width: 10, height: 10)
+            
+            Text(String(blues))
+                .font(.footnote)
+                .foregroundStyle(.primary)
+        }
+    }
+    
+    private var whiteMarker: some View {
+        HStack(spacing: 6) {
+            
+            Circle()
+                .fill(.white)
+                .frame(width: 10, height: 10)
+            
+            Text(String(whites))
+                .font(.footnote)
+                .foregroundStyle(.primary)
+        }
+    }
+    
+    private var redMarker: some View {
+        HStack(spacing: 6) {
+            
+            Circle()
+                .fill(.red)
+                .frame(width: 10, height: 10)
+            
+            Text(String(reds))
+                .font(.footnote)
+                .foregroundStyle(.primary)
+        }
     }
 }
 
 #Preview {
     VStack {
-        YardageView(321, .blue)
-        YardageView(305, .white)
-        YardageView(289, .red)
+        YardageView(b: 321, w: 315, r: 300)
     }
     .padding()
     .background(Color(.secondarySystemBackground))
