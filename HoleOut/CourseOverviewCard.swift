@@ -26,20 +26,39 @@ struct CourseOverviewCard: View {
     // MARK: - Components
     
     private var headerSection: some View {
-        HStack {
-            VStack(alignment: .leading) {
-                Text("Course Overview")
-                    .font(.headline)
-                    .fontWeight(.bold)
-                
-                Label(course.address, systemImage: "location.fill")
-                    .font(.subheadline)
-                    .foregroundStyle(.secondary)
+        VStack {
+            HStack {
+                courseHeader
+                Spacer()
             }
-            Spacer()
-            YardageView(b: course.blues, w: course.whites, r: course.reds)
+            
+            Divider()
+            HStack {
+                statLine
+                Spacer()
+                YardageView(b: course.blues, w: course.whites, r: course.reds, markerLeft: false)
+            }
         }
-        
+    }
+    
+    private var courseHeader: some View {
+        VStack(alignment: .leading) {
+            Text("Course Overview")
+                .font(.headline)
+                .fontWeight(.bold)
+            
+            Label(course.address, systemImage: "location.fill")
+                .font(.subheadline)
+                .foregroundStyle(.secondary)
+        }
+    }
+    
+    private var statLine: some View {
+            VStack(alignment: .leading) {
+                StatItem(label: "Front", value: course.frontPar)
+                StatItem(label: "Back", value: course.backPar)
+                StatItem(label: "Total", value: course.par)
+            }
     }
 }
 
