@@ -48,16 +48,16 @@ private extension Course {
                 Hole(id: 5, par: 3, blues: 163, whites: 145, reds: 127),
                 Hole(id: 6, par: 4, blues: 332, whites: 326, reds: 317),
                 Hole(id: 7, par: 4, blues: 282, whites: 271, reds: 256),
-                Hole(id: 8, par: 4, blues: 366, whites: 355, reds: 339),
-                Hole(id: 9, par: 5, blues: 520, whites: 497, reds: 444),
-                Hole(id: 10, par: 4, blues: 441, whites: 430, reds: 418),
+                Hole(id: 8, par: 4, blues: 366, whites: 355, reds: 339, holeType: .dogLeft),
+                Hole(id: 9, par: 5, blues: 520, whites: 497, reds: 444, holeType: .dogLeft),
+                Hole(id: 10, par: 4, blues: 441, whites: 430, reds: 418, holeType: .dogRight),
                 Hole(id: 11, par: 4, blues: 483, whites: 471, reds: 461),
                 Hole(id: 12, par: 3, blues: 220, whites: 206, reds: 223),
                 Hole(id: 13, par: 5, blues: 516, whites: 496, reds: 476),
                 Hole(id: 14, par: 3, blues: 205, whites: 185, reds: 165),
                 Hole(id: 15, par: 4, blues: 330, whites: 316, reds: 301),
                 Hole(id: 16, par: 4, blues: 325, whites: 319, reds: 325),
-                Hole(id: 17, par: 5, blues: 516, whites: 504, reds: 448),
+                Hole(id: 17, par: 5, blues: 516, whites: 504, reds: 448, holeType: .dogLeft),
                 Hole(id: 18, par: 3, blues: 169, whites: 159, reds: 154)
             ]
         )
