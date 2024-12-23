@@ -40,7 +40,7 @@ struct CourseSelectView: View {
                     ScrollView {
                         LazyVStack {
                             ForEach(searchResults) { course in
-                                CourseCardView(for: course)
+                                CourseCard(for: course)
                             }
                         }
                     }

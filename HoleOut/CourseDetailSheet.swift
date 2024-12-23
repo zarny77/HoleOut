@@ -24,7 +24,7 @@ struct CourseDetailSheet: View {
     
     var body: some View {
         let courseRounds = rounds.filter { $0.course == course }
-            .sorted {$0.date > $1.date }
+            .sorted { $0.date > $1.date }
         
         ScrollView {
             VStack {
@@ -47,7 +47,7 @@ struct CourseDetailSheet: View {
                     )
                 } else {
                     ForEach(courseRounds) { round in
-                        RoundCardView(for: round, amended: true)
+                        RoundCard(for: round, amended: true)
                     }
                 }
             }
