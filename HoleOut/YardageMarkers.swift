@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct YardageView: View {
+struct YardageMarkers: View {
     
     // store yardages and pin colour
     let blues: Int
@@ -105,10 +105,10 @@ struct YardageView: View {
 
 #Preview {
     VStack(spacing: 30) {
-        YardageView(b: 321, w: 315, r: 300, isVertical: false, markerLeft: true)
-        YardageView(b: 321, w: 315, r: 300, isVertical: false, markerLeft: false)
-        YardageView(b: 321, w: 315, r: 300, isVertical: true, markerLeft: true)
-        YardageView(b: 321, w: 315, r: 300, isVertical: true, markerLeft: false)
+        YardageMarkers(b: 321, w: 315, r: 300, isVertical: false, markerLeft: true)
+        YardageMarkers(b: 321, w: 315, r: 300, isVertical: false, markerLeft: false)
+        YardageMarkers(b: 321, w: 315, r: 300, isVertical: true, markerLeft: true)
+        YardageMarkers(b: 321, w: 315, r: 300, isVertical: true, markerLeft: false)
     }
     .padding()
     .background(Color(.secondarySystemBackground))

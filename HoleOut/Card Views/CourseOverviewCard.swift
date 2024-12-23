@@ -36,7 +36,7 @@ struct CourseOverviewCard: View {
             HStack {
                 statLine
                 Spacer()
-                YardageView(b: course.blues, w: course.whites, r: course.reds, markerLeft: false)
+                YardageMarkers(b: course.blues, w: course.whites, r: course.reds, markerLeft: false)
             }
         }
     }

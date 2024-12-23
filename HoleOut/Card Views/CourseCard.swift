@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct CourseCardView: View {
+struct CourseCard: View {
     
     private let course: Course
     private let logger: Logger
@@ -86,5 +86,5 @@ struct CourseCardView: View {
 }
 
 #Preview {
-    CourseCardView(for: MockData.previewCourse)
+    CourseCard(for: MockData.previewCourse)
 }

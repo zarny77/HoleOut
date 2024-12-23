@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct RoundCardView: View {
+struct RoundCard: View {
     
     private let round: Round
     private let course: Course
@@ -77,6 +77,6 @@ struct RoundCardView: View {
 }
 
 #Preview {
-    RoundCardView(for: MockData.previewRound, amended: false)
-    RoundCardView(for: MockData.previewRound, amended: true)
+    RoundCard(for: MockData.previewRound, amended: false)
+    RoundCard(for: MockData.previewRound, amended: true)
 }
