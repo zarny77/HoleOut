@@ -13,7 +13,7 @@ struct RoundCard: View {
     private let course: Course
     private let amended: Bool
     
-    private let logger = Logger(origin: "RoundCardView")
+    private let logger = Logger(origin: "RoundCard")
     
     init(for round: Round, amended: Bool) {
         self.round = round
@@ -25,7 +25,7 @@ struct RoundCard: View {
     var body: some View {
         GroupBox {
             headerSection
-            Divider()
+
             statSection
             
         }
@@ -66,12 +66,14 @@ struct RoundCard: View {
     }
     // Shows the scores for the round
     private var statSection: some View {
-        HStack {
-            StatItem(label: "Total", value: round.totalScore)
-            Spacer()
-            StatItem(label: "Front", value: round.frontNine)
-            Spacer()
-            StatItem(label: "Back", value: round.backNine)
+        GroupBox {
+            HStack {
+                StatItem(label: "Total", value: round.totalScore)
+                Spacer()
+                StatItem(label: "Front", value: round.frontNine)
+                Spacer()
+                StatItem(label: "Back", value: round.backNine)
+            }
         }
     }
 }
