@@ -9,6 +9,9 @@ import SwiftUI
 
 struct CourseCard: View {
     
+    @State private var showingCourseDetail = false
+    @State private var showingScorecardView = false
+    @EnvironmentObject private var roundVM: RoundViewModel
     private let course: Course
     private let logger: Logger
     
@@ -24,6 +27,12 @@ struct CourseCard: View {
             buttonSet
         }
         .padding(.horizontal)
+        .sheet(isPresented: $showingCourseDetail) {
+            CourseDetailSheet(for: course)
+        }
+        .navigationDestination(isPresented: $showingScorecardView) {
+            ScorecardView()
+        }
         .onAppear {
             logger.log("loaded")
         }
@@ -32,7 +41,7 @@ struct CourseCard: View {
     
     // MARK: - Components
     
-    // Displayes name, address, and par
+    // Displays name, address, and par
     private var courseDetails: some View {
         HStack {
             VStack (alignment: .leading) {
@@ -61,10 +70,10 @@ struct CourseCard: View {
         .frame(maxHeight: 50)
     }
     
-    
+    // Shows the CourseDetailSheet
     private var previewCourseButton: some View {
         Button {
-            
+            showingCourseDetail = true
         } label: {
             Label("Details", systemImage: "info.circle")
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -73,9 +82,11 @@ struct CourseCard: View {
         .buttonStyle(.borderedProminent)
     }
     
+    // Shows the ScorecardView
     private var startRoundButton: some View {
         Button {
-            
+            roundVM.startNewRound(at: course)
+            showingScorecardView = true
         } label: {
             Label("Start Round", systemImage: "figure.golf")
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -87,4 +98,5 @@ struct CourseCard: View {
 
 #Preview {
     CourseCard(for: MockData.previewCourse)
+        .modelContainer(for: Round.self, inMemory: true)
 }
