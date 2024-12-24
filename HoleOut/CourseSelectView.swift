@@ -10,9 +10,11 @@ import SwiftUI
 struct CourseSelectView: View {
     
     @State private var searchText = ""
+    @EnvironmentObject private var roundVM: RoundViewModel
     private let logger = Logger(origin: "CourseSelectView")
     
     // allow search by name or address
+    // contains all courses if no search is entered
     private var searchResults: [Course] {
         if searchText.isEmpty {
             return CourseRepository.shared.getAllCourses()
@@ -23,6 +25,8 @@ struct CourseSelectView: View {
         }
     }
 
+    // If search results are empty, shows ContentUnavailable.
+    // If no search is entered, show all courses
     var body: some View {
         NavigationStack {
             Group {
@@ -32,13 +36,13 @@ struct CourseSelectView: View {
                         ContentUnavailableView(
                             "No courses matching \(searchText)",
                             systemImage: "flag.slash",
-                            description: Text("Try a different course maybe?")
+                            description: Text("Try searching for a different course")
                         )
                         Spacer()
                     }
                 } else {
                     ScrollView {
-                        LazyVStack {
+                        VStack {
                             ForEach(searchResults) { course in
                                 CourseCard(for: course)
                             }
