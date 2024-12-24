@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftData
+import SwiftUI
 
 final class RoundViewModel: ObservableObject {
     @Published private(set) var currentRound: Round?
@@ -18,6 +19,9 @@ final class RoundViewModel: ObservableObject {
     init(modelContext: ModelContext) {
         self.modelContext = modelContext
     }
+    
+    // MARK: - Public Properties
+    
     
     // MARK: - Round Management
     
@@ -63,7 +67,6 @@ final class RoundViewModel: ObservableObject {
         }
     }
     
-    
     func updateScore(for holeIndex: Int, score: Int) {
         guard var round = currentRound,
               holeIndex < round.scores.count else { return }
@@ -77,6 +80,23 @@ final class RoundViewModel: ObservableObject {
         logger.log("Updated score to \(score) for hole \(holeIndex)", level: .success)
     }
     
+    var scoreBindings: [Binding<Int>] {
+        guard let round = currentRound else { return [] }
+        
+        return round.scores.indices.map { index in
+            Binding(
+                get: { round.scores[index] },
+                set: { self.updateScore(for: index, score: $0) }
+            )
+        }
+    }
     
-    
+}
+
+extension RoundViewModel {
+    static var preview: RoundViewModel {
+        let vm = RoundViewModel(modelContext: ModelContext(try! ModelContainer(for: Round.self)))
+        vm.startNewRound(at: MockData.previewCourse)
+        return vm
+    }
 }
