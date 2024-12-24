@@ -10,22 +10,29 @@ import SwiftData
 
 @main
 struct HoleOutApp: App {
-    var sharedModelContainer: ModelContainer = {
+    
+    @StateObject private var roundVM: RoundViewModel
+    let sharedModelContainer: ModelContainer
+    
+    init() {
         let schema = Schema([
             Round.self,
         ])
         let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
 
         do {
-            return try ModelContainer(for: schema, configurations: [modelConfiguration])
+            let container = try ModelContainer(for: schema, configurations: [modelConfiguration])
+            self.sharedModelContainer = container
+            _roundVM = StateObject(wrappedValue: RoundViewModel(modelContext: container.mainContext))
         } catch {
             fatalError("Could not create ModelContainer: \(error)")
         }
-    }()
-
+    }
+    
     var body: some Scene {
         WindowGroup {
             CourseSelectView()
+                .environmentObject(roundVM)
         }
         .modelContainer(sharedModelContainer)
     }
