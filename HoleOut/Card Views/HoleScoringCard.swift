@@ -76,12 +76,10 @@ struct HoleScoringCard: View {
     
     // MARK: Buttons
     private var buttonStack: some View {
-        GroupBox {
-            VStack {
-                addStroke
-                Spacer()
-                subtractStroke
-            }
+        VStack {
+            addStroke
+            Spacer()
+            subtractStroke
         }
     }
     
@@ -94,7 +92,7 @@ struct HoleScoringCard: View {
         } label: {
             Label("Subtract", systemImage: "minus.circle.fill")
                 .labelStyle(.iconOnly)
-                .font(.largeTitle)
+                .font(.system(size: 50))
         }
         .symbolRenderingMode(.hierarchical)
         .foregroundStyle(.green)
@@ -109,7 +107,7 @@ struct HoleScoringCard: View {
         } label: {
             Label("Add", systemImage: "plus.circle.fill")
                 .labelStyle(.iconOnly)
-                .font(.largeTitle)
+                .font(.system(size: 50))
         }
         .symbolRenderingMode(.hierarchical)
         .foregroundStyle(.red)
