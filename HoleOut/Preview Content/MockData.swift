@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftData
 
 enum MockData {
     static let rounds: [Round] = {
@@ -45,4 +46,25 @@ enum MockData {
     static var previewCourse: Course {
         CourseRepository.shared.getAllCourses()[0]
     }
+    
+    @MainActor
+    static var container: ModelContainer = {
+            let schema = Schema([Round.self])
+            let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: true)
+            
+            do {
+                let container = try ModelContainer(for: schema, configurations: [modelConfiguration])
+                
+                // Add some sample data
+                for round in rounds {
+                    container.mainContext.insert(round)
+                }
+                
+                
+                return container
+            } catch {
+                fatalError("Could not create preview container: \(error.localizedDescription)")
+            }
+        }()
+    
 }
