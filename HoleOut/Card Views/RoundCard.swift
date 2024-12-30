@@ -59,7 +59,7 @@ struct RoundCard: View {
                 }
             }
             Spacer()
-            RelativeScore(par: course.par, score: round.totalScore)
+            RelativeScore(par: round.parForPlayedHoles, score: round.totalScore)
                 .font(.title)
         }
         
