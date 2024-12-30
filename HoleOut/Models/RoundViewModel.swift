@@ -20,9 +20,6 @@ final class RoundViewModel: ObservableObject {
         self.modelContext = modelContext
     }
     
-    // MARK: - Public Properties
-    
-    
     // MARK: - Round Management
     
     // starts a new round
