@@ -10,7 +10,11 @@ import SwiftUI
 struct ScorecardView: View {
     @EnvironmentObject private var roundVM: RoundViewModel
     @Environment(\.modelContext) private var modelContext
+    @Environment(\.dismiss) private var dismiss
+    @Binding var selectedTab: Int
     @State private var showActions = false
+    
+    private let logger = Logger(origin: "ScorecardView")
     
     var body: some View {
         VStack {
@@ -79,7 +83,9 @@ struct ScorecardView: View {
         HStack {
             // discard button
             Button {
-                
+                logger.log("Discard pressed")
+                roundVM.abandonRound()
+                dismiss()
             } label: {
                 Label("Discard", systemImage: "trash")
                     .padding()
@@ -89,7 +95,10 @@ struct ScorecardView: View {
             .tint(Color(.red).opacity(0.5))
 
             Button {
-                
+                logger.log("Save pressed")
+                roundVM.saveRound()
+                dismiss()
+                selectedTab = 1
             } label: {
                 Label("Save", systemImage: "square.and.arrow.down")
                     .padding()
@@ -104,6 +113,6 @@ struct ScorecardView: View {
 }
 
 #Preview {
-    ScorecardView()
+    ScorecardView(selectedTab: .constant(0))
         .environmentObject(RoundViewModel.preview)
 }

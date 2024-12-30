@@ -9,6 +9,7 @@ import SwiftUI
 
 struct CourseSelectView: View {
     
+    @Binding var selectedTab: Int
     @State private var searchText = ""
     @EnvironmentObject private var roundVM: RoundViewModel
     private let logger = Logger(origin: "CourseSelectView")
@@ -44,7 +45,7 @@ struct CourseSelectView: View {
                     ScrollView {
                         VStack {
                             ForEach(searchResults) { course in
-                                CourseCard(for: course)
+                                CourseCard(for: course, selectedTab: $selectedTab)
                             }
                         }
                     }
@@ -59,6 +60,6 @@ struct CourseSelectView: View {
 }
 
 #Preview {
-    CourseSelectView()
+    CourseSelectView(selectedTab: .constant(0))
         .modelContainer(for: Round.self, inMemory: true)
 }

@@ -12,6 +12,7 @@ import SwiftData
 struct HoleOutApp: App {
     
     @StateObject private var roundVM: RoundViewModel
+    @State private var selectedTab = 0
     let sharedModelContainer: ModelContainer
     
     init() {
@@ -31,9 +32,22 @@ struct HoleOutApp: App {
     
     var body: some Scene {
         WindowGroup {
-            CourseSelectView()
-                .environmentObject(roundVM)
+            TabView(selection: $selectedTab){
+                CourseSelectView(selectedTab: $selectedTab)
+                    .environmentObject(roundVM)
+                    .tabItem {
+                        Label("Courses", systemImage: "house.and.flag.circle.fill")
+                    }
+                    .tag(0)
+                
+                RoundListView()
+                    .environmentObject(roundVM)
+                    .tabItem {
+                        Label("History", systemImage: "flag.pattern.checkered")
+                    }
+                    .tag(1)
+            }
+            .modelContainer(sharedModelContainer)
         }
-        .modelContainer(sharedModelContainer)
     }
 }

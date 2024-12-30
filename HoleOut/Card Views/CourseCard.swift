@@ -12,11 +12,13 @@ struct CourseCard: View {
     @State private var showingCourseDetail = false
     @State private var showingScorecardView = false
     @EnvironmentObject private var roundVM: RoundViewModel
+    @Binding var selectedTab: Int
     private let course: Course
     private let logger: Logger
     
-    init(for course: Course) {
+    init(for course: Course, selectedTab: Binding<Int>) {
         self.course = course
+        self._selectedTab = selectedTab
         self.logger = Logger(origin: "CourseCard: \(course.name)")
     }
     
@@ -31,7 +33,7 @@ struct CourseCard: View {
             CourseDetailSheet(for: course)
         }
         .navigationDestination(isPresented: $showingScorecardView) {
-            ScorecardView()
+            ScorecardView(selectedTab: $selectedTab)
         }
         .onAppear {
             logger.log("loaded")
@@ -97,6 +99,6 @@ struct CourseCard: View {
 }
 
 #Preview {
-    CourseCard(for: MockData.previewCourse)
+    CourseCard(for: MockData.previewCourse, selectedTab: .constant(0))
         .modelContainer(for: Round.self, inMemory: true)
 }
