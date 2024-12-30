@@ -40,11 +40,16 @@ final class Round {
             .reduce(0,+)
     }
     
-    private var parForPlayedHoles: Int {
-        zip(course.holes, playedHoles)
+    var parForPlayedHoles: Int {
+        let total = zip(course.holes, playedHoles)
             .filter {_, played in played }
-            .map { hole, _ in hole.par }
+            .map { hole, _ in
+                print("Counting par \(hole.par) for hole \(hole.id)")
+                return hole.par
+            }
             .reduce(0,+)
+        print("Total par for played holes: \(total)")
+            return total
     }
     
     var frontNine: Int {
